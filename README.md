@@ -1,2 +1,0 @@
-# PMX_importer
-PMXモデルをMAYAで読み込むPythonスクリプト
