@@ -100,8 +100,14 @@ class MAYA_Model:
             
             # テクスチャを割り当て
             if mat.texIndex != -1:
+                # ノード作成
                 tex_node = cd.shadingNode("file",asTexture=True, name=matName+"_texture")
-                cd.setAttr(tex_node+".fileTextureName",self.modelData.texPaths[mat.texIndex],type="string")
+                # パスの取得
+                tex_path = self.modelData.texPaths[mat.texIndex]
+                if self.projectPath in tex_path:
+                    tex_path = tex_path.replace(self.projectPath,"")
+                # パスを割り当て
+                cd.setAttr(tex_node+".fileTextureName",tex_path,type="string")
                 cd.connectAttr(tex_node+".outColor",matName+".color",force=True)
 
             # マテリアルを割り当て
